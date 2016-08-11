@@ -168,7 +168,7 @@ server {
 	{{ end }}
 
 	location / {
-		proxy_pass {{ trim $proto }}://{{ trim $host }};
+		proxy_pass {{ trim $proto }}://{{ trim $host }}$is_args$args;
 		{{ if (exists (printf "/etc/nginx/htpasswd/%s" $host)) }}
 		auth_basic	"Restricted {{ $host }}";
 		auth_basic_user_file	{{ (printf "/etc/nginx/htpasswd/%s" $host) }};
@@ -197,7 +197,7 @@ server {
 	{{ end }}
 
 	location / {
-		proxy_pass {{ trim $proto }}://{{ trim $host }};
+		proxy_pass {{ trim $proto }}://{{ trim $host }}$is_args$args;
 		{{ if (exists (printf "/etc/nginx/htpasswd/%s" $host)) }}
 		auth_basic	"Restricted {{ $host }}";
 		auth_basic_user_file	{{ (printf "/etc/nginx/htpasswd/%s" $host) }};
